@@ -1,0 +1,58 @@
+# -----------------------------
+# OS / Editor
+# -----------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# -----------------------------
+# Node / Frontend
+# -----------------------------
+node_modules/
+dist/
+build/
+coverage/
+
+# -----------------------------
+# Environment / Secrets
+# -----------------------------
+.env
+*.env
+!.env.example
+
+# -----------------------------
+# Docker
+# -----------------------------
+*.pid
+*.seed
+
+# -----------------------------
+# Project-specific paths
+# -----------------------------
+auth-service/app/db.sqlite3
+blog-service/app/db.sqlite3
+blog-service/venv/
+frontend/node_modules/

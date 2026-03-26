@@ -1,0 +1,168 @@
+:root {
+  --bg-ink: #0d1b2a;
+  --bg-mid: #1b263b;
+  --bg-card: #2f3f57;
+  --accent: #f4a261;
+  --accent-strong: #e76f51;
+  --text-main: #f8f9fa;
+  --text-muted: #d9e2ec;
+  --ring: rgba(244, 162, 97, 0.35);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Urbanist", "Segoe UI", sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(244, 162, 97, 0.14), transparent 40%),
+    radial-gradient(circle at 85% 0%, rgba(231, 111, 81, 0.22), transparent 35%),
+    linear-gradient(145deg, var(--bg-ink), var(--bg-mid));
+}
+
+.section-form {
+  width: min(92%, 96rem);
+  margin: 3.2rem auto 2.4rem;
+  padding: 1.8rem;
+  border-radius: 1.6rem;
+  background: rgba(19, 35, 59, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(8px);
+  animation: fade-slide 280ms ease-out;
+}
+
+.section-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.section-form input {
+  width: 100%;
+  color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1rem;
+  outline: none;
+  padding: 1rem 1.2rem;
+  font-size: 1.5rem;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.section-form input::placeholder {
+  color: rgba(240, 248, 255, 0.72);
+}
+
+.section-form input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.section-form button,
+.section-post button {
+  border: 0;
+  border-radius: 1rem;
+  padding: 1rem 1.6rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1d232f;
+  background: linear-gradient(135deg, #ffd09b, var(--accent));
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.section-form button:hover,
+.section-post button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 12px 22px rgba(244, 162, 97, 0.32);
+}
+
+.section-post {
+  width: min(92%, 112rem);
+  margin: 0 auto 4rem;
+}
+
+.section-post ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.8rem;
+}
+
+.section-post li {
+  background: linear-gradient(165deg, rgba(28, 43, 66, 0.95), rgba(37, 56, 85, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1.3rem;
+  padding: 1.6rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  animation: fade-slide 320ms ease-out;
+}
+
+.section-post p {
+  margin: 0 0 0.9rem;
+  line-height: 1.5;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.section-post p:first-child {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.section-post .btn-update {
+  margin-right: 0.8rem;
+}
+
+.section-post .btn-delete {
+  color: #fff;
+  background: linear-gradient(135deg, #f07878, var(--accent-strong));
+}
+
+.section-post .btn-delete:hover {
+  box-shadow: 0 12px 22px rgba(231, 111, 81, 0.36);
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 980px) {
+  .section-form form {
+    grid-template-columns: 1fr;
+  }
+
+  .section-post ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .section-post ol {
+    grid-template-columns: 1fr;
+  }
+
+  .section-form,
+  .section-post {
+    width: 94%;
+  }
+}

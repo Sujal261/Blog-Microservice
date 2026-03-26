@@ -1,0 +1,65 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - auth-service
+      - blog-service
+      - frontend
+  frontend:
+    build: ./frontend/
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+  auth-service:
+    build: ./auth-service/
+    env_file:
+      - ./auth-service/app/app/.env
+    volumes:
+      - ./auth-service:/app
+    depends_on:
+      auth-db:
+        condition: service_healthy # ← changed
+  auth-db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: authdb
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - auth_postgres_data:/var/lib/postgresql/data
+    healthcheck: # ← added
+      test: ["CMD-SHELL", "pg_isready -U auth_user -d authdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  blog-service:
+    build: ./blog-service/
+    env_file:
+      - ./blog-service/app/app/.env
+    volumes:
+      - ./blog-service:/app
+    depends_on:
+      blog-db:
+        condition: service_healthy # ← changed
+  blog-db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - blog_postgres_data:/var/lib/postgresql/data
+    healthcheck: # ← added
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  auth_postgres_data:
+  blog_postgres_data:
